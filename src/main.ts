@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 import * as swaggerStats from 'swagger-stats';
 import { AppModule } from './app.module';
@@ -13,6 +14,11 @@ const getHost = (): string => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('CHAMELEON STACK')
