@@ -9,7 +9,7 @@ import { initial } from './system/utils/initial';
 dotenv.config();
 
 const getHost = (): string => {
-  return `http://localhost:3000`;
+  return `https://nodejs-nest-postgresql.cyclic.app`;
 };
 
 async function bootstrap() {
