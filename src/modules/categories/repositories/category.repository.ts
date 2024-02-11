@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from '../../users/entities/user.entity';
 import { CategoryEntity } from '../entities/category.entity';
+import { CreateyCategorDTO } from '../useCases/createCategory/dtos/request/create-user-request.dto';
 import { CategoryRepositoryInterface } from './interfaces/category-repository.interface';
 
 @Injectable()
@@ -13,10 +14,10 @@ export class CategoryRepository
     super(CategoryEntity, dataSource.manager);
   }
   public async createAndSave(
-    name: string,
+    { name, color }: CreateyCategorDTO,
     user: UserEntity,
   ): Promise<CategoryEntity> {
-    const category = this.create({ name, user });
+    const category = this.create({ name, color, user });
 
     return await this.save(category);
   }

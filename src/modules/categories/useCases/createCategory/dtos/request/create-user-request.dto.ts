@@ -1,7 +1,7 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 
-export class CreateUserDTO {
+export class CreateyCategorDTO {
   @ApiProperty({
     type: 'string',
     description: 'User name',
@@ -17,29 +17,4 @@ export class CreateUserDTO {
   })
   @IsString()
   readonly color: string;
-
-  @ApiProperty({
-    type: 'string',
-    description: 'User email',
-    example: 'test@example.com',
-  })
-  @IsString()
-  readonly email: string;
-
-  @ApiProperty({
-    type: 'string',
-    description: 'User password',
-    example: '********',
-  })
-  @IsString()
-  readonly password: string;
-
-  @ApiPropertyOptional({
-    type: 'string',
-    description: 'Photo profile',
-    example: 'photo.png',
-  })
-  @IsString()
-  @IsOptional()
-  readonly photo?: string;
 }

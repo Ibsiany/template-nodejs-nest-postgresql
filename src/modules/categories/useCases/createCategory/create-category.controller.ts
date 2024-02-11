@@ -12,6 +12,7 @@ import { CustomApiResponseGetDataWrapper } from '../../../../system/decorators/s
 import { CategoryEntityDTO } from '../../dtos/response/category.entity.dto';
 import { CategoryEntity } from '../../entities/category.entity';
 import { CreateCategoryUseCase } from './create-category.usecase';
+import { CreateyCategorDTO } from './dtos/request/create-user-request.dto';
 
 @ApiTags('Category')
 @Controller('category')
@@ -27,9 +28,9 @@ export class CreateCategoryController implements BaseControllerInterface {
     type: CategoryEntityDTO,
   })
   public async handle(
-    @Body() data: { name: string },
+    @Body() data: CreateyCategorDTO,
     @Param('user_id', new ParseUUIDPipe()) user_id: string,
   ): Promise<CategoryEntity> {
-    return this.createCategoryUseCase.execute(data.name, user_id);
+    return this.createCategoryUseCase.execute(data, user_id);
   }
 }

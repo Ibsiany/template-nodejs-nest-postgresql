@@ -9,6 +9,7 @@ import { UserRepository } from '../../../users/repositories/user.repository';
 import { CategoryEntity } from '../../entities/category.entity';
 import { CategoryRepository } from '../../repositories/category.repository';
 import { CategoryRepositoryInterface } from '../../repositories/interfaces/category-repository.interface';
+import { CreateyCategorDTO } from './dtos/request/create-user-request.dto';
 
 @Injectable()
 export class CreateCategoryUseCase {
@@ -20,7 +21,7 @@ export class CreateCategoryUseCase {
     private readonly userRepository: UserRepositoryInterface,
   ) {}
 
-  public async execute(name: string, user_id: string): Promise<CategoryEntity> {
+  public async execute({name, color}: CreateyCategorDTO, user_id: string): Promise<CategoryEntity> {
     if (!name || !user_id) {
       throw new BadRequestException('Name/User id is required!');
     }
@@ -31,7 +32,7 @@ export class CreateCategoryUseCase {
       throw new NotFoundException('User does not exists!');
     }
 
-    const card = await this.categoryRepository.createAndSave(name, user);
+    const card = await this.categoryRepository.createAndSave({name, color}, user);
 
     return card;
   }
