@@ -36,29 +36,27 @@ export class CardRepository
     user_id,
   }: FindAllCardsDTO): Promise<CardEntity[]> {
     const query = this.dataSource
-      .createQueryBuilder(CardEntity, 'card')
-      .select('*')
-      .where(`card.user_id = '${user_id}'`);
+      .createQueryBuilder(CardEntity, 'Card')
+      .leftJoinAndSelect('Card.categories', 'Category')
+      .where(`Card.user_id = '${user_id}'`);
 
     if (description) {
-      query.andWhere(`lower(card.description) ilike '%${description}%'`);
+      query.andWhere(`lower(Card.description) ilike '%${description}%'`);
     }
 
     if (status) {
-      query.andWhere(`card.status = '${status}'`);
+      query.andWhere(`Card.status = '${status}'`);
     }
 
     if (title) {
-      query.andWhere(`lower(card.title) ilike '%${title}%'`);
+      query.andWhere(`lower(Card.title) ilike '%${title}%'`);
     }
 
     if (id) {
-      query.andWhere(`card.id = '${id}'`);
+      query.andWhere(`Card.id = '${id}'`);
     }
 
-    const cards = await query.getRawMany();
-
-    return cards;
+    return query.getMany();
   }
 
   public async deleteCard(card: CardEntity): Promise<void> {
