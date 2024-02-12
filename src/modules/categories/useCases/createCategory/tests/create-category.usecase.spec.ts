@@ -76,7 +76,7 @@ describe('Create category UseCase', () => {
       .mockResolvedValueOnce(category);
 
     const result = await createCategoryUseCase.execute(
-      'Test category',
+      { name: 'Test category', color: 'blue' },
       user.id,
     );
 

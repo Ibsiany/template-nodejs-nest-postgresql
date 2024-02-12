@@ -50,7 +50,7 @@ describe('Create category Controller', () => {
   });
 
   it('Should be able to create category and return status 201', async () => {
-    const category = { name: 'Test category' } as CategoryEntity;
+    const category = { name: 'Test category', color: 'red' } as CategoryEntity;
 
     const createCategoryUseCaseSpy = jest
       .spyOn(createCategoryUseCase, 'execute')
@@ -58,7 +58,7 @@ describe('Create category Controller', () => {
 
     const result = await request(app.getHttpServer())
       .post('/category/c36614aa-b41d-4b3a-b454-bed69f431ff5')
-      .send('Test category')
+      .send(category)
       .expect(HttpStatus.CREATED);
 
     expect(result.body).toEqual(category);
