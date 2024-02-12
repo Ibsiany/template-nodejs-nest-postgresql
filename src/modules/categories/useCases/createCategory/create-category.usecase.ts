@@ -9,7 +9,7 @@ import { UserRepository } from '../../../users/repositories/user.repository';
 import { CategoryEntity } from '../../entities/category.entity';
 import { CategoryRepository } from '../../repositories/category.repository';
 import { CategoryRepositoryInterface } from '../../repositories/interfaces/category-repository.interface';
-import { CreateyCategorDTO } from './dtos/request/create-user-request.dto';
+import { CreateyCategoryDTO } from './dtos/request/create-user-request.dto';
 
 @Injectable()
 export class CreateCategoryUseCase {
@@ -22,7 +22,7 @@ export class CreateCategoryUseCase {
   ) {}
 
   public async execute(
-    { name, color }: CreateyCategorDTO,
+    { name, color }: CreateyCategoryDTO,
     user_id: string,
   ): Promise<CategoryEntity> {
     if (!name || !user_id) {

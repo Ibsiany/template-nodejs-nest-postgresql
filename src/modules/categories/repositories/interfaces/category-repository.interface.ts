@@ -1,10 +1,10 @@
 import { UserEntity } from '../../../users/entities/user.entity';
 import { CategoryEntity } from '../../entities/category.entity';
-import { CreateyCategorDTO } from '../../useCases/createCategory/dtos/request/create-user-request.dto';
+import { CreateyCategoryDTO } from '../../useCases/createCategory/dtos/request/create-user-request.dto';
 
 export interface CategoryRepositoryInterface {
   createAndSave(
-    data: CreateyCategorDTO,
+    data: CreateyCategoryDTO,
     user: UserEntity,
   ): Promise<CategoryEntity>;
   findAll(user_id: string, name?: string): Promise<CategoryEntity[]>;
