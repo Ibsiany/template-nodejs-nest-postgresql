@@ -1,5 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
+import { CategoryEntity } from '../../../categories/entities/category.entity';
 import { UserEntity } from '../../../users/entities/user.entity';
 
 export class CreateAndSaveCardDTO {
@@ -33,4 +34,11 @@ export class CreateAndSaveCardDTO {
   })
   @IsString()
   readonly user: UserEntity;
+
+  @ApiPropertyOptional({
+    type: CategoryEntity,
+    description: 'Category',
+  })
+  @IsOptional()
+  readonly categories: CategoryEntity[];
 }
