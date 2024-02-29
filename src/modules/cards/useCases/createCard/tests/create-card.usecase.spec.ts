@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { CategoryRepository } from '../../../../categories/repositories/category.repository';
 import { UserEntity } from '../../../../users/entities/user.entity';
 import { UserRepository } from '../../../../users/repositories/user.repository';
 import { CardEntity } from '../../../entities/card.entity';
@@ -24,6 +25,12 @@ describe('Create card UseCase', () => {
         },
         {
           provide: getRepositoryToken(UserRepository),
+          useValue: {
+            findById: jest.fn(),
+          },
+        },
+        {
+          provide: getRepositoryToken(CategoryRepository),
           useValue: {
             findById: jest.fn(),
           },
@@ -60,7 +67,14 @@ describe('Create card UseCase', () => {
       title: 'Card',
     } as CreateCardDTO;
 
-    const cardCreated = Object.assign(card, { id: '1' }) as CardEntity;
+    const cardCreated: CardEntity = {
+      ...card,
+      id: '1',
+      created_at: new Date(),
+      updated_at: new Date(),
+      user: null,
+      categories: [],
+    };
 
     const findUserByIdSpy = jest
       .spyOn(repositoryUser, 'findById')

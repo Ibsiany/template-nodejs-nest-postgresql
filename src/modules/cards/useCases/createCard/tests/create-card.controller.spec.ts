@@ -2,6 +2,7 @@ import { HttpStatus, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import request from 'supertest';
+import { CategoryRepository } from '../../../../categories/repositories/category.repository';
 import { UserRepository } from '../../../../users/repositories/user.repository';
 import { CardEntity } from '../../../entities/card.entity';
 import { CardRepository } from '../../../repositories/card.repository';
@@ -24,6 +25,10 @@ describe('Create card Controller', () => {
         },
         {
           provide: getRepositoryToken(UserRepository),
+          useValue: {},
+        },
+        {
+          provide: getRepositoryToken(CategoryRepository),
           useValue: {},
         },
       ],
