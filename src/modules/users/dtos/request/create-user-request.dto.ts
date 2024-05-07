@@ -1,5 +1,5 @@
-import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 
 export class ICreateUserDTO {
   @ApiProperty({
@@ -28,8 +28,8 @@ export class ICreateUserDTO {
 
   @ApiProperty({
     type: 'string',
-    description: 'Photo profile',
-    example: 'photo.png',
+    description: 'Photo profile in base64 format',
+    example: 'string',
   })
   @IsString()
   readonly photo?: string;

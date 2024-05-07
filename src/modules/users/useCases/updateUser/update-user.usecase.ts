@@ -5,8 +5,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { compare, hash } from 'bcryptjs';
-import fs from 'fs';
-import path from 'path';
 import { UserEntity } from '../../entities/user.entity';
 import { UserRepositoryInterface } from '../../repositories/interfaces/user-repository.interface';
 import { UserRepository } from '../../repositories/user.repository';
@@ -48,15 +46,6 @@ export class UpdateUserUseCase {
     }
 
     if (photo) {
-      const filePath = path.join(
-        __dirname,
-        `../../../../uploads/${user.photo}`,
-      );
-
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-
       user.photo = photo;
     }
 
