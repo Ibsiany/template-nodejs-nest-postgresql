@@ -18,12 +18,7 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept',
-    credentials: true,
-  });
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('CHAMELEON STACK')
