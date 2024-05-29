@@ -9,7 +9,7 @@ import { initial } from './system/utils/initial';
 dotenv.config();
 
 const getHost = (): string => {
-  return `https://template-nodejs-nest-postgresql.onrender.com`;
+  return process.env.URI_EXTERNAL || `http://localhost:3000`;
 };
 
 async function bootstrap() {
